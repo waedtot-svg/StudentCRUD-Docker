@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.StudentManagementSystem.controller.StudentFXMLController">
+
+    <Label layoutX="20" layoutY="20" text="Student Database Management System"/>
+
+    <Label layoutX="40" layoutY="80" text="ID:"/>
+    <TextField fx:id="idField" layoutX="90" layoutY="75"/>
+
+    <Label layoutX="320" layoutY="80" text="Name:"/>
+    <TextField fx:id="nameField" layoutX="380" layoutY="75"/>
+
+    <Label layoutX="40" layoutY="130" text="Major:"/>
+    <TextField fx:id="majorField" layoutX="90" layoutY="125"/>
+
+    <Label layoutX="320" layoutY="130" text="Grade:"/>
+    <TextField fx:id="gradeField" layoutX="380" layoutY="125"/>
+
+    <Button text="Add Student" layoutX="50" layoutY="180" onAction="#addStudent"/>
+    <Button text="Update Student" layoutX="180" layoutY="180" onAction="#updateStudent"/>
+    <Button text="Delete Student" layoutX="330" layoutY="180" onAction="#deleteStudent"/>
+    <Button text="Clear Fields" layoutX="480" layoutY="180" onAction="#clearFields"/>
+    <Button text="Refresh" layoutX="630" layoutY="180" onAction="#loadStudents"/>
+
+    <TableView fx:id="studentTable" layoutX="50" layoutY="240" prefHeight="300" prefWidth="800">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="100"/>
+            <TableColumn fx:id="nameColumn" text="Name" prefWidth="250"/>
+            <TableColumn fx:id="majorColumn" text="Major" prefWidth="250"/>
+            <TableColumn fx:id="gradeColumn" text="Grade" prefWidth="200"/>
+        </columns>
+    </TableView>
+
+</AnchorPane>
