@@ -148,6 +148,32 @@ docker compose down
 
 The MySQL named volume preserves stored data when the containers are stopped.
 
+## 🚀 PowerShell Scripts (Bonus E)
+
+The project includes PowerShell scripts to simplify Docker operations on Windows.
+
+### ▶️ Start the Application
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\start.ps1"
+```
+
+### 📊 Check Container Status
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\status.ps1"
+```
+
+### 🛑 Stop the Application
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\stop.ps1"
+```
+
+These scripts automate Docker Compose commands and include basic error handling.
+
+The execution policy option applies only to the launched PowerShell process.
+
 ## 🛠️ Troubleshooting
 
 ### ❌ Docker Engine Is Not Running
