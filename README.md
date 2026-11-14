@@ -1,41 +1,54 @@
-# 👩🏻‍💻 StudentCRUD – Spring Boot Student Management System
+# 👩🏻‍💻 StudentCRUD – Student Management System
 
-## 🧾 Project Overview
+## 🧾 About the Project
 
-StudentCRUD is a Student Management System developed using **Spring Boot, Java 21, Spring Data JPA, and MySQL**.
+StudentCRUD is a student management system that I developed using Java, Spring Boot, and MySQL.
 
-The application provides REST APIs to manage student records and perform CRUD operations.
+The project provides REST APIs for managing student information. It allows me to add students, view their details, update their information, and delete records.
 
-🐳 Docker and Docker Compose are used to simplify deployment and provide a consistent environment across different machines.
+For **OS Lab Assignment #2**, I worked on running this project with Docker instead of setting up the application and database separately.
 
-## 💫 Technologies Used
+I also used Git and GitHub to organize my changes and keep track of my work.
 
-- ☕ Java 21
-- 🍃 Spring Boot 4.0.6
-- 🌐 Spring Web MVC
-- 🗄️ Spring Data JPA
-- 🐬 MySQL 8.4
-- 📦 Maven
-- 🐳 Docker & Docker Compose
-- 🌿 Git & GitHub
+## 💻 Technologies Used
 
-## ✨ Features
+- Java 21
+- Spring Boot 4.0.6
+- Spring Web MVC
+- Spring Data JPA
+- MySQL 8.4
+- Maven
+- Docker and Docker Compose
+- Git and GitHub
+- GitHub Actions
+- PowerShell
 
-- ➕ Add new students
-- 📋 View all students
-- 🔍 Search for students by ID
-- ✏️ Update student information
-- 🗑️ Delete student records
-- 🗄️ Store student data in MySQL
-- 🌐 REST API Support
-- 🐳 Run the application using Docker
+## ✨ What the Project Can Do
 
-## 📚 Project Structure
+The application supports these operations:
+
+- Add a new student.
+- View all students.
+- Find a student by ID.
+- Update student information.
+- Delete a student.
+- Store student records in MySQL.
+
+I tested these operations through the REST API.
+
+## 📂 Project Structure
 
 ```text
 StudentCRUD-Docker/
+├── .github/
+│   └── workflows/
+│       └── docker-build.yml
 ├── .mvn/
 ├── src/
+├── scripts/
+│   ├── start.ps1
+│   ├── status.ps1
+│   └── stop.ps1
 ├── docs/
 │   ├── screenshots/
 │   └── notes.md
@@ -49,84 +62,98 @@ StudentCRUD-Docker/
 └── README.md
 ```
 
-## ⚙️ Prerequisites
+The `docs/screenshots` folder contains screenshots of the steps I completed during the assignment.
 
-To run the application using Docker, install:
+I also added `docs/notes.md` to explain the problems I faced and what I learned.
 
-- 🐳 Docker Desktop
-- Docker Compose (included with Docker Desktop)
-- Git (optional, for cloning the repository)
+## ⚙️ Before Running the Project
 
-**Note:** Java, Maven, and MySQL do not need to be installed locally when running the application using Docker.
+To run my project with Docker, I need:
 
-## 🔐 Environment Configuration
+- Docker Desktop
+- Docker Compose, which comes with Docker Desktop
+- Git, if I want to clone the project from GitHub
 
-Create a `.env` file in the project root directory.
+I do not need to install MySQL or Maven separately to run the Docker version.
 
-Add the following variables:
+## 🔐 Database Configuration
+
+Before starting the containers, I create a `.env` file in the main project folder.
+
+It contains the database passwords:
 
 ```env
-DB_PASSWORD=replace_with_your_database_password
-DB_ROOT_PASSWORD=replace_with_your_root_password
+DB_PASSWORD=your_database_password
+DB_ROOT_PASSWORD=your_root_password
 ```
 
-Replace the example values with two different, secure passwords.
+I replace these example values with two different passwords.
 
-**Important:** Do not upload the `.env` file to GitHub.
+I keep this file private and do not upload it to GitHub.
 
-## 🐳 Build and Run with Docker
+## 🐳 How I Run the Project
 
-### 1️⃣ Open the Project
+### Step 1 – Open the project
 
-Open PowerShell or the VS Code terminal inside the project directory.
+I open the StudentCRUD-Docker folder in VS Code and use the PowerShell terminal.
 
-### 2️⃣ Check Docker Compose Configuration
+### Step 2 – Check the Docker configuration
 
-```bash
+```powershell
 docker compose config --quiet
 ```
 
-### 3️⃣ Build and Start Containers
+I use this command to check the Docker Compose configuration before starting the containers.
 
-```bash
+### Step 3 – Build and start
+
+```powershell
 docker compose up --build -d
 ```
 
-This command builds the Spring Boot application and starts the application and MySQL containers.
+This builds the application image and starts Spring Boot and MySQL.
 
-### 4️⃣ Check Running Containers
+### Step 4 – Check the containers
 
-```bash
+```powershell
 docker compose ps
 ```
 
-The application and database containers should be running.
+I use this command to make sure the containers are running.
 
-### 5️⃣ Access the Application
+Both containers also have Docker Healthchecks.
 
-Open your browser and visit:
+### Step 5 – Open the API
+
+After the application starts, I open:
 
 http://localhost:9090/students
 
-The API returns the student records in JSON format.
+The page returns the student data in JSON format.
+
+I can also check the application health using:
+
+http://localhost:9090/actuator/health
+
+When the application is healthy, the endpoint returns an `UP` status.
 
 ## 🌐 REST API Endpoints
 
-| Method | Endpoint | Description |
+| Method | Endpoint | What it does |
 |---|---|---|
-| GET | `/students` | View all students |
-| GET | `/students/{id}` | Get student by ID |
-| POST | `/students` | Add a new student |
-| PUT | `/students/{id}` | Update student information |
-| DELETE | `/students/{id}` | Delete a student |
+| GET | `/students` | Shows all students |
+| GET | `/students/{id}` | Finds a student by ID |
+| POST | `/students` | Adds a student |
+| PUT | `/students/{id}` | Updates a student |
+| DELETE | `/students/{id}` | Deletes a student |
 
-## ➕ Example: Add a Student
+### Example – Adding a Student
 
-Send a POST request to:
+To add a student, I send a POST request to:
 
 `http://localhost:9090/students`
 
-Using the following JSON body:
+Example JSON:
 
 ```json
 {
@@ -136,104 +163,145 @@ Using the following JSON body:
 }
 ```
 
-The application stores the student information in MySQL and returns the saved student data with an automatically generated ID.
+The application saves the student in MySQL and gives the new record an ID.
 
-## 🛑 Stop the Application
+I tested the other CRUD operations as well.
 
-To stop the running containers:
+## 🛑 Stopping the Containers
 
-```bash
+When I finish, I use:
+
+```powershell
 docker compose down
 ```
 
-The MySQL named volume preserves stored data when the containers are stopped.
+This stops and removes the containers.
 
-## 🚀 PowerShell Scripts (Bonus E)
+I used a named Docker volume for MySQL, so the saved data can remain available when I start the containers again.
 
-The project includes PowerShell scripts to simplify Docker operations on Windows.
+## 🚀 PowerShell Scripts – Bonus E
 
-### ▶️ Start the Application
+I also created three PowerShell scripts to make Docker commands easier to run on Windows.
+
+### Start the project
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\start.ps1"
 ```
 
-### 📊 Check Container Status
+### Check container status
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\status.ps1"
 ```
 
-### 🛑 Stop the Application
+### Stop the project
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File ".\scripts\stop.ps1"
 ```
 
-These scripts automate Docker Compose commands and include basic error handling.
+I tested all three scripts.
 
-The execution policy option applies only to the launched PowerShell process.
+The execution policy option is applied to the PowerShell process started by the command.
 
-## 🛠️ Troubleshooting
+## ⭐ Extra Tasks I Completed
 
-### ❌ Docker Engine Is Not Running
+Besides the main assignment, I completed the bonus tasks.
 
-Start Docker Desktop and check the connection:
+**Bonus A – Docker Compose**
 
-```bash
+I used Docker Compose to start the application and MySQL together.
+
+**Bonus B – GitHub Actions**
+
+I created a workflow called Docker Image CI. It builds the Docker image when changes are pushed to `main` or when a Pull Request is opened.
+
+I checked the workflow results on GitHub, and the Docker build passed.
+
+**Bonus C – Multi-stage Dockerfile**
+
+My Dockerfile has two stages. The first uses Maven to build the project, and the second uses Java to run the application.
+
+**Bonus D – Healthcheck**
+
+I added Spring Boot Actuator and Docker Healthchecks. I tested the application health endpoint and checked the container statuses.
+
+**Bonus E – PowerShell Scripts**
+
+I created `start.ps1`, `status.ps1`, and `stop.ps1` and tested them.
+
+**Bonus G – Pull Request**
+
+I created a separate branch called `ci/update-github-actions` to update my GitHub Actions workflow.
+
+I opened Pull Request #1, checked that the Docker build passed, and then merged it into `main`.
+
+## 🛠️ Problems I Faced
+
+I faced a few problems while preparing the project.
+
+**Docker Engine was not running**
+
+I opened Docker Desktop and checked the connection using:
+
+```powershell
 docker info
 ```
 
-### ❌ Application Is Not Responding
+**The application could not connect to MySQL**
 
-Check the containers and application logs:
+I changed the database host from `localhost` to the Docker Compose service name `db`.
 
-```bash
-docker compose ps
-docker compose logs app
-```
+**PowerShell blocked my scripts**
 
-### ❌ Database Connection Problem
+I ran the scripts using a PowerShell command with `-ExecutionPolicy RemoteSigned`.
 
-Check the MySQL logs:
+I wrote more details about these problems in `docs/notes.md`.
 
-```bash
-docker compose logs db
-```
+## 🧪 Testing and Screenshots
 
-Make sure the database credentials in `.env` are configured correctly.
+During the assignment, I tested:
 
-## 📸 Screenshots and Testing
+- Building the Docker image.
+- Starting and stopping the containers.
+- Connecting the application to MySQL.
+- Adding, viewing, updating, and deleting students.
+- Checking the application health.
+- Running the PowerShell scripts.
+- Building the Docker image through GitHub Actions.
+- Creating and merging a Pull Request.
 
-The project was tested using Docker and PowerShell.
+The Maven packaging build succeeded with automated tests skipped.
 
-The following REST API operations were successfully tested:
-
-- ✅ CREATE – Add Student
-- ✅ READ – View Students
-- ✅ UPDATE – Update Student
-- ✅ DELETE – Delete Student
-
-Screenshots of the Docker build, running containers, and REST API tests are available in:
+I saved screenshots of the main steps in:
 
 `docs/screenshots/`
 
-## 📝 Technical Notes
+## 📝 My Technical Notes
 
-Additional information about the Docker implementation, commands, and troubleshooting is available in:
+I wrote about my work, the errors I faced, and the things I learned in:
 
 `docs/notes.md`
 
-## 🌟 Project Origin
+## 🔗 GitHub Repositories
 
-This project was adapted from my original StudentCRUD application:
+**My Docker assignment project:**
+
+https://github.com/waedtot-svg/StudentCRUD-Docker
+
+To clone it:
+
+```bash
+git clone https://github.com/waedtot-svg/StudentCRUD-Docker.git
+```
+
+**My original StudentCRUD project:**
 
 https://github.com/waedtot-svg/StudentCRUD
 
-The original project also includes a JavaFX interface. This Docker configuration runs the Spring Boot REST API and MySQL database.
-
-Docker configuration and documentation were added for **OS Lab Assignment #2 – Docker & GitHub**.
+My original project also has a JavaFX interface. For this assignment, I used the Spring Boot REST API with MySQL inside Docker.
 
 ---
 
-### 💻 Developed and documented for OS Lab Assignment #2
+*Developed and documented for OS Lab Assignment #2 – Docker & GitHub.*
